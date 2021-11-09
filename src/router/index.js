@@ -1,21 +1,24 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import Home from "../views/Home.vue"
+import Main from "../views/Main.vue"
+
+import { authRoutes } from "./modules"
+import { onlyAuth } from "./routerGuards"
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
+    path: "*",
+    redirect: "/",
   },
   {
-    path: "/about",
-    name: "About",
-
-    component: () => import("../views/About.vue"),
+    path: "/",
+    name: "Main",
+    beforeEnter: onlyAuth,
+    component: Main,
   },
+  ...authRoutes,
 ]
 
 const router = new VueRouter({

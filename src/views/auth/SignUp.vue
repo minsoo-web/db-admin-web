@@ -1,0 +1,104 @@
+<template>
+  <section class="sign-up-form">
+    <v-form v-model="isAllPass">
+      <v-text-field
+        v-model="userId"
+        label="아이디"
+        :rules="[rules.require]"
+        hide-details="auto"
+      ></v-text-field>
+      <v-text-field
+        :rules="[rules.require, rules.min]"
+        :type="'password'"
+        name="input-10-2"
+        label="비밀번호"
+        v-model="pw"
+        hide-details="auto"
+      ></v-text-field>
+      <v-text-field
+        :rules="[rules.require, rules.min, passwordConfirmationRule]"
+        :type="'password'"
+        name="input-10-2"
+        label="비밀번호 확인"
+        v-model="rePw"
+        hide-details="auto"
+      ></v-text-field>
+      <v-text-field
+        v-model="userName"
+        label="이름"
+        :rules="[rules.require]"
+        hide-details="auto"
+      ></v-text-field>
+      <v-text-field
+        v-model="department"
+        label="부서명"
+        :rules="[rules.require]"
+        hide-details="auto"
+      ></v-text-field>
+      <!--  -->
+      <div class="button-wrapper">
+        <v-btn
+          class="login-btn"
+          :loading="loading"
+          :disabled="!isAllPass || loading"
+          color="secondary"
+        >
+          회원가입
+        </v-btn>
+        <router-link to="/login">로그인</router-link>
+      </div>
+    </v-form>
+  </section>
+</template>
+
+<script>
+  export default {
+    name: "login-form",
+    computed: {
+      passwordConfirmationRule() {
+        return () => this.pw === this.rePw || "비밀번호가 일치하지 않습니다."
+      },
+    },
+    data: () => ({
+      rules: {
+        require: value => !!value || "필수입력 사항입니다.",
+        min: v => v.length >= 8 || "비밀번호는 최소 8글자 이상입니다.",
+      },
+
+      userId: "",
+      pw: "",
+      rePw: "",
+      userName: "",
+      department: "",
+
+      loading: false,
+
+      isAllPass: false,
+
+      pwShow: false,
+      pwReShow: false,
+    }),
+    methods: {},
+  }
+</script>
+
+<style lang="scss" scoped>
+  .sign-up-form {
+    width: 50vw;
+
+    .button-wrapper {
+      display: flex;
+      flex-direction: column;
+
+      justify-content: center;
+      align-items: center;
+
+      margin-top: 20px;
+
+      .login-btn {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+  }
+</style>
