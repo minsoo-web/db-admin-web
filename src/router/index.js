@@ -2,16 +2,13 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 import Main from "../views/Main.vue"
 
-import { authRoutes } from "./modules"
+import { errorRoutes, authRoutes } from "./modules"
 import { onlyAuth } from "./routerGuards"
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: "*",
-    redirect: "/",
-  },
+  ...errorRoutes,
   {
     path: "/",
     name: "Main",

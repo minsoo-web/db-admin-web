@@ -1,54 +1,70 @@
 <template>
   <section class="sign-in-form">
-    <v-text-field
-      label="아이디"
-      v-model="loginForm.id"
-      hide-details="auto"
-    ></v-text-field>
-    <v-text-field
-      :type="'password'"
-      name="input-10-2"
-      label="비밀번호"
-      v-model="loginForm.password"
-      hide-details="auto"
-    ></v-text-field>
+    <v-form v-model="emailPass">
+      <v-text-field
+        label="이메일"
+        v-model="loginForm.email"
+        hide-details="auto"
+        :rules="emailRules"
+      ></v-text-field>
+      <v-text-field
+        :type="'password'"
+        name="input-10-2"
+        label="비밀번호"
+        v-model="loginForm.password"
+        hide-details="auto"
+      ></v-text-field>
+    </v-form>
     <!--  -->
     <div class="button-wrapper">
       <v-btn
         class="login-btn"
         :loading="loading"
-        :disabled="!isComplete"
+        :disabled="!emailPass || !isComplete"
         color="secondary"
+        @click="callSignInApi"
       >
         로그인
       </v-btn>
-      <router-link to="/sign-up">회원가입</router-link>
+      <router-link to="/auth/sign-up">회원가입</router-link>
     </div>
   </section>
 </template>
 
 <script>
+  import { mapActions } from "vuex"
   export default {
     name: "SignIn",
     computed: {
       isComplete() {
-        const { id, password } = this.loginForm
-        return id.length > 0 && password.length > 0
+        const { email, password } = this.loginForm
+        return email.length > 0 && password.length > 0
       },
     },
 
     data: () => ({
       pw: "",
       loginForm: {
-        id: "",
+        email: "",
         password: "",
       },
-
+      emailRules: [
+        v =>
+          !v ||
+          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+          "이메일 형식에 맞게 입력해주세요",
+      ],
+      emailPass: false,
       loading: false,
-
-      show: false,
     }),
-    methods: {},
+    methods: {
+      ...mapActions("authStore", ["postSignIn"]),
+      async callSignInApi() {
+        this.loading = true
+        await this.postSignIn(this.loginForm)
+        this.loading = false
+      },
+    },
   }
 </script>
 

@@ -1,3 +1,4 @@
 import authRoutes from "./authRoutes"
+import errorRoutes from "./errorRoutes"
 
-export { authRoutes }
+export { errorRoutes, authRoutes }
