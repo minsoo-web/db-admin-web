@@ -1,5 +1,8 @@
 <template>
   <section class="sign-in-form">
+    <div class="logo-container">
+      <Logo />
+    </div>
     <v-form v-model="emailPass">
       <v-text-field
         label="이메일"
@@ -33,7 +36,10 @@
 
 <script>
   import { mapActions } from "vuex"
+  import Logo from "@/components/Common/Logo.vue"
+
   export default {
+    components: { Logo },
     name: "SignIn",
     computed: {
       isComplete() {
@@ -71,6 +77,13 @@
 <style lang="scss" scoped>
   .sign-in-form {
     width: 50vw;
+
+    .logo-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     .button-wrapper {
       display: flex;

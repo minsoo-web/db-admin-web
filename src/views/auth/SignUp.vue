@@ -45,7 +45,7 @@
         >
           회원가입
         </v-btn>
-        <router-link to="/login">로그인</router-link>
+        <router-link to="/auth/sign-in">로그인</router-link>
       </div>
     </v-form>
   </section>
