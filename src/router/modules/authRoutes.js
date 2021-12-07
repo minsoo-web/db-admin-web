@@ -1,10 +1,8 @@
-import { onlyNotAuth } from "../routerGuards"
-
 export default [
   {
     path: "/auth",
     component: () => import("../../views/auth/AuthIndex.vue"),
-    beforeEnter: onlyNotAuth,
+
     children: [
       {
         path: "sign-in",

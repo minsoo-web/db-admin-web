@@ -8,12 +8,12 @@ import { getFirestore } from "firebase/firestore"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDlbXMLvjQ4sN9K5soHUIpXO2GFSR0FF1Q",
-  authDomain: "db-admin-8ded5.firebaseapp.com",
-  projectId: "db-admin-8ded5",
-  storageBucket: "db-admin-8ded5.appspot.com",
-  messagingSenderId: "826800820896",
-  appId: "1:826800820896:web:b93059e2ca660ee99b6fc5",
+  apiKey: "AIzaSyAf0jwoliB7VmADgm1dQYZ__AaxfwJ32YM",
+  authDomain: "erica-db.firebaseapp.com",
+  projectId: "erica-db",
+  storageBucket: "erica-db.appspot.com",
+  messagingSenderId: "333085499308",
+  appId: "1:333085499308:web:0ba1f66d6dc37d66d1a409",
 }
 
 // Initialize Firebase

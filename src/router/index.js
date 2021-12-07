@@ -3,7 +3,6 @@ import VueRouter from "vue-router"
 import Main from "../views/Main.vue"
 
 import { errorRoutes, authRoutes } from "./modules"
-import { onlyAuth } from "./routerGuards"
 
 Vue.use(VueRouter)
 
@@ -12,7 +11,7 @@ const routes = [
   {
     path: "/",
     name: "Main",
-    beforeEnter: onlyAuth,
+
     component: Main,
   },
   ...authRoutes,

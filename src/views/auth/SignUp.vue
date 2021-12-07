@@ -3,7 +3,7 @@
     <v-form v-model="isAllPass">
       <v-text-field
         v-model="userId"
-        label="아이디"
+        label="이메일"
         :rules="[rules.require]"
         hide-details="auto"
       ></v-text-field>
@@ -35,13 +35,26 @@
         :rules="[rules.require]"
         hide-details="auto"
       ></v-text-field>
+      <v-select
+        v-model="theather"
+        :items="computedTheaterLabel"
+        label="근무 영화관 (코드)"
+      ></v-select>
       <!--  -->
       <div class="button-wrapper">
         <v-btn
           class="login-btn"
           :loading="loading"
-          :disabled="!isAllPass || loading"
           color="secondary"
+          @click="
+            postSignUp({
+              userId,
+              pw,
+              userName,
+              department,
+              theather,
+            })
+          "
         >
           회원가입
         </v-btn>
@@ -52,11 +65,19 @@
 </template>
 
 <script>
+  import { mapActions, mapState } from "vuex"
+
   export default {
     name: "login-form",
     computed: {
+      ...mapState("authStore", ["theaterList"]),
       passwordConfirmationRule() {
         return () => this.pw === this.rePw || "비밀번호가 일치하지 않습니다."
+      },
+      computedTheaterLabel() {
+        return this.theaterList.map(doc => {
+          return doc.code + " " + doc.name
+        })
       },
     },
     data: () => ({
@@ -70,6 +91,7 @@
       rePw: "",
       userName: "",
       department: "",
+      theather: "",
 
       loading: false,
 
@@ -78,7 +100,12 @@
       pwShow: false,
       pwReShow: false,
     }),
-    methods: {},
+    methods: {
+      ...mapActions("authStore", ["postSignUp", "getTheaterList"]),
+    },
+    async mounted() {
+      await this.getTheaterList()
+    },
   }
 </script>
 
