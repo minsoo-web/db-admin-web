@@ -52,7 +52,7 @@
     },
     watch: {
       async uid() {
-        await this.getUser()
+        if (this.userInfo === null) await this.getUser()
       },
     },
     data() {
@@ -60,22 +60,40 @@
         drawer: true,
         items: [
           {
-            title: "근태관리",
+            title: "출퇴근 기록",
             icon: "mdi-home-variant-outline",
             activeIcon: "mdi-home-variant",
-            path: "/",
+            path: "/manage-commuting",
           },
           {
-            title: "관리자 권한 관리",
+            title: "고충신고",
             icon: "mdi-account-circle-outline",
             activeIcon: "mdi-account-circle",
-            path: "/users",
+            path: "/voice-of-customer",
           },
           {
-            title: "투표 현황 조회",
+            title: "휴가 신청 및 관리",
+            icon: "mdi-account-circle-outline",
+            activeIcon: "mdi-account-circle",
+            path: "/vacation",
+          },
+          {
+            title: "배급 영화 관리",
             icon: "mdi-checkbox-multiple-marked-circle-outline",
             activeIcon: "mdi-checkbox-multiple-marked-circle",
-            path: "/votes",
+            path: "/manage-movie",
+          },
+          {
+            title: "상영 일정 관리",
+            icon: "mdi-checkbox-multiple-marked-circle-outline",
+            activeIcon: "mdi-checkbox-multiple-marked-circle",
+            path: "/manage-movie-date",
+          },
+          {
+            title: "비품 관리",
+            icon: "mdi-checkbox-multiple-marked-circle-outline",
+            activeIcon: "mdi-checkbox-multiple-marked-circle",
+            path: "/manage-product",
           },
           {
             title: "로그아웃",

@@ -19,6 +19,6 @@
 
 <style lang="scss">
   .main-container {
-    margin-left: 56px;
+    margin-left: 256px;
   }
 </style>

@@ -13,6 +13,45 @@ const routes = [
     name: "Main",
 
     component: Main,
+    redirect: "/manage-commuting",
+    children: [
+      {
+        // 고충신고
+        path: "/manage-commuting",
+        name: "ManageCommuting",
+        component: () => import("@/views/ManageCommuting.vue"),
+      },
+      {
+        // 고충신고
+        path: "/voice-of-customer",
+        name: "VoiceOfCustomer",
+        component: () => import("@/views/VoiceOfCustomer.vue"),
+      },
+      {
+        // 휴가 신청 및 관리
+        path: "/vacation",
+        name: "Vacation",
+        component: () => import("@/views/Vacation.vue"),
+      },
+      {
+        // 휴가 신청 및 관리
+        path: "/manage-movie",
+        name: "ManageMovie",
+        component: () => import("@/views/ManageMovie.vue"),
+      },
+      {
+        // 휴가 신청 및 관리
+        path: "/manage-movie-date",
+        name: "ManageMovieDate",
+        component: () => import("@/views/ManageMovieDate.vue"),
+      },
+      {
+        // 비품 관리
+        path: "/manage-product",
+        name: "ManageProduct",
+        component: () => import("@/views/ManageProduct.vue"),
+      },
+    ],
   },
   ...authRoutes,
 ]

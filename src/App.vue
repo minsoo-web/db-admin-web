@@ -24,7 +24,6 @@
           //
 
           this.SET_UID(user.uid)
-          if (this.$route.path !== "/") this.$router.push("/")
         } else {
           //
           if (this.$route.path !== "/auth/sign-in")
@@ -34,3 +33,5 @@
     },
   }
 </script>
+
+scss
