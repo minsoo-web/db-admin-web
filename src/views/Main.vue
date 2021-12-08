@@ -1,18 +1,24 @@
 <template>
   <div>
-    <button @click="logout">로그아웃</button>
+    <NavDrawer />
+
+    <v-main class="main-container">
+      <router-view />
+    </v-main>
   </div>
 </template>
 
 <script>
-  import { auth } from "../firebase"
-
+  import NavDrawer from "@/components/Common/NavDrawer.vue"
   export default {
     name: "Main",
-    methods: {
-      logout() {
-        auth.signOut()
-      },
-    },
+    components: { NavDrawer },
+    methods: {},
   }
 </script>
+
+<style lang="scss">
+  .main-container {
+    margin-left: 56px;
+  }
+</style>

@@ -3,15 +3,19 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth"
 import { auth, db } from "../../firebase"
-import { collection, getDocs, setDoc, doc } from "firebase/firestore"
+import { getDoc, collection, getDocs, setDoc, doc } from "firebase/firestore"
 
 export default {
   namespaced: true,
   state: {
     userInfo: null,
     theaterList: [],
+    uid: null,
   },
   mutations: {
+    SET_UID(state, payload) {
+      state.uid = payload
+    },
     SET_USER_INFO(state, payload) {
       state.userInfo = payload
     },
@@ -20,6 +24,10 @@ export default {
     },
   },
   actions: {
+    async signOut() {
+      auth.signOut()
+    },
+
     async getTheaterList({ commit }) {
       const snapshot = await getDocs(collection(db, "theater"))
       let data = []
@@ -52,16 +60,27 @@ export default {
         await createUserWithEmailAndPassword(auth, userId, pw)
         const uid = auth.currentUser.uid
 
+        const computedTheather = theather.split(" ")[0]
+
         await setDoc(doc(db, "employee", uid), {
           id: uid,
           name: userName,
           department,
-          theather,
+          theather: computedTheather,
           vacation: 10,
         })
       } catch (error) {
         console.log(error)
       }
+    },
+
+    async getUser({ state, commit }) {
+      const uid = state.uid
+
+      const docRef = doc(db, "employee", uid)
+      const docSnap = await getDoc(docRef)
+
+      commit("SET_USER_INFO", docSnap.data())
     },
   },
 }
