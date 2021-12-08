@@ -5,7 +5,7 @@
     v-model="drawer"
     permanent
   >
-    <v-list-item class="px-2">
+    <v-list-item class="px-2" style="padding: 0 16px !important">
       <v-list-item-avatar>
         <v-img
           src="https://user-images.githubusercontent.com/57122180/144985636-fb5b64fb-3d5d-48e3-acee-7c37da0fd9d5.png"
