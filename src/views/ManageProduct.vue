@@ -15,7 +15,7 @@
         loading-text="처리중입니다..."
         :headers="headers"
         :items="productItemList"
-        :items-per-page="10"
+        :items-per-page="3"
         class="elevation-1"
       >
         <template v-slot:item.index="{ item }">
@@ -86,23 +86,44 @@
         {
           id: "monster",
           name: "몬스터 드링크",
-          price: 123123123,
+          price: 2300,
           minNum: 100,
           origin: "농심",
         },
         {
           id: "hotdog",
           name: "핫도그",
-          price: 12334521,
+          price: 1500,
           minNum: 100,
           origin: "롯데",
         },
         {
           id: "starbuck",
           name: "커피 원두",
-          price: 213123,
+          price: 20000,
           minNum: 100,
           origin: "스타벅스",
+        },
+        {
+          id: "hotsix",
+          name: "핫식스",
+          price: 1200,
+          minNum: 100,
+          origin: "롯데칠성음료",
+        },
+        {
+          id: "bananaMilk",
+          name: "바나나맛 우유",
+          price: 1300,
+          minNum: 100,
+          origin: "농심",
+        },
+        {
+          id: "nacho",
+          name: "나초",
+          price: 400,
+          minNum: 100,
+          origin: "울산 김민수 공장",
         },
       ],
     }),
@@ -114,7 +135,7 @@
             text: "이름",
             value: "name",
           },
-          { text: "배급사", value: "origin" },
+          { text: "제조사", value: "origin" },
           { text: "가격", value: "price" },
           { text: "최소 주문 갯수", value: "minNum" },
           { text: "주문하기", value: "orderBtn" },

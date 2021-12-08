@@ -1,45 +1,43 @@
 <template>
   <section class="sign-in-form">
-    <div class="logo-container">
-      <Logo />
-    </div>
-    <v-form v-model="emailPass">
-      <v-text-field
-        label="이메일"
-        v-model="loginForm.email"
-        hide-details="auto"
-        :rules="emailRules"
-      ></v-text-field>
-      <v-text-field
-        :type="'password'"
-        name="input-10-2"
-        label="비밀번호"
-        v-model="loginForm.password"
-        hide-details="auto"
-      ></v-text-field>
-    </v-form>
-    <!--  -->
-    <div class="button-wrapper">
-      <v-btn
-        class="login-btn"
-        :loading="loading"
-        :disabled="!emailPass || !isComplete"
-        color="secondary"
-        @click="callSignInApi"
-      >
-        로그인
-      </v-btn>
-      <router-link to="/auth/sign-up">회원가입</router-link>
+    <div class="container">
+      <div class="logo-container"><span>DB코딩보험</span></div>
+      <v-form v-model="emailPass">
+        <v-text-field
+          label="이메일"
+          v-model="loginForm.email"
+          hide-details="auto"
+          :rules="emailRules"
+        ></v-text-field>
+        <v-text-field
+          :type="'password'"
+          name="input-10-2"
+          label="비밀번호"
+          v-model="loginForm.password"
+          hide-details="auto"
+        ></v-text-field>
+      </v-form>
+      <!--  -->
+      <div class="button-wrapper">
+        <v-btn
+          class="login-btn"
+          :loading="loading"
+          :disabled="!emailPass || !isComplete"
+          color="secondary"
+          @click="callSignInApi"
+        >
+          로그인
+        </v-btn>
+        <router-link to="/auth/sign-up">회원가입</router-link>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
   import { mapActions } from "vuex"
-  import Logo from "@/components/Common/Logo.vue"
 
   export default {
-    components: { Logo },
     name: "SignIn",
     computed: {
       isComplete() {
@@ -83,6 +81,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      > span {
+        font-size: 45px;
+      }
     }
 
     .button-wrapper {
