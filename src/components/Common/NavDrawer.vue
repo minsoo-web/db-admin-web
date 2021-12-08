@@ -3,7 +3,6 @@
     v-if="userInfo"
     class="main-drawer"
     v-model="drawer"
-    :mini-variant.sync="mini"
     permanent
   >
     <v-list-item class="px-2">
@@ -15,21 +14,49 @@
 
       <v-list-item-title>{{ userInfo.name }}</v-list-item-title>
       <v-list-item-subtitle>{{ userInfo.department }}</v-list-item-subtitle>
-
-      <v-btn icon @click.stop="mini = !mini">
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
     </v-list-item>
 
     <v-divider></v-divider>
 
     <v-list dense>
       <v-list-item
-        v-for="item in items"
+        v-for="item in manageItems"
         :key="item.title"
-        link
-        @click="$getSafe(() => item.onclick())"
         :href="item.path"
+      >
+        <v-list-item-icon>
+          <v-icon v-if="computeIcon(item)">{{ item.activeIcon }}</v-icon>
+          <v-icon v-else>{{ item.icon }}</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+
+    <v-list dense>
+      <v-list-item
+        v-for="item in movieItems"
+        :key="item.title"
+        :href="item.path"
+      >
+        <v-list-item-icon>
+          <v-icon v-if="computeIcon(item)">{{ item.activeIcon }}</v-icon>
+          <v-icon v-else>{{ item.icon }}</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+
+    <v-list dense>
+      <v-list-item
+        v-for="item in etcItems"
+        :key="item.title"
+        @click="$getSafe(() => item.onclick())"
       >
         <v-list-item-icon>
           <v-icon v-if="computeIcon(item)">{{ item.activeIcon }}</v-icon>
@@ -58,7 +85,8 @@
     data() {
       return {
         drawer: true,
-        items: [
+
+        manageItems: [
           {
             title: "출퇴근 기록",
             icon: "mdi-home-variant-outline",
@@ -77,6 +105,15 @@
             activeIcon: "mdi-account-circle",
             path: "/vacation",
           },
+
+          {
+            title: "비품 관리",
+            icon: "mdi-checkbox-multiple-marked-circle-outline",
+            activeIcon: "mdi-checkbox-multiple-marked-circle",
+            path: "/manage-product",
+          },
+        ],
+        movieItems: [
           {
             title: "배급 영화 관리",
             icon: "mdi-checkbox-multiple-marked-circle-outline",
@@ -89,19 +126,15 @@
             activeIcon: "mdi-checkbox-multiple-marked-circle",
             path: "/manage-movie-date",
           },
-          {
-            title: "비품 관리",
-            icon: "mdi-checkbox-multiple-marked-circle-outline",
-            activeIcon: "mdi-checkbox-multiple-marked-circle",
-            path: "/manage-product",
-          },
+        ],
+
+        etcItems: [
           {
             title: "로그아웃",
             icon: "mdi-logout-variant",
             onclick: () => this.signOut(),
           },
         ],
-        mini: false,
       }
     },
     methods: {

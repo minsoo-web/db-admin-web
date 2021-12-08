@@ -41,4 +41,7 @@
   p {
     margin: 0 !important;
   }
+  * {
+    box-sizing: border-box !important;
+  }
 </style>

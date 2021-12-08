@@ -3,7 +3,16 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth"
 import { auth, db } from "../../firebase"
-import { getDoc, collection, getDocs, setDoc, doc } from "firebase/firestore"
+import {
+  updateDoc,
+  getDoc,
+  collection,
+  getDocs,
+  setDoc,
+  doc,
+  arrayUnion,
+} from "firebase/firestore"
+import router from "../../router"
 
 export default {
   namespaced: true,
@@ -39,13 +48,17 @@ export default {
       commit("SET_THEATER_LIST", data)
     },
 
-    async postSignIn(context, payload) {
+    async postSignIn({ commit, dispatch }, payload) {
       const { email, password } = payload
 
       try {
-        const response = await signInWithEmailAndPassword(auth, email, password)
-        console.log(response)
-        console.log(auth.currentUser)
+        await signInWithEmailAndPassword(auth, email, password)
+
+        const uid = auth.currentUser.uid
+        commit("SET_UID", uid)
+        await dispatch("getUser")
+
+        router.push("/")
       } catch (error) {
         if (error.code === "auth/user-not-found")
           alert("가입되지 않은 유저입니다.")
@@ -55,10 +68,14 @@ export default {
       }
     },
 
-    async postSignUp(constext, { userId, pw, userName, department, theather }) {
+    async postSignUp(
+      { commit, dispatch },
+      { userId, pw, userName, department, theather },
+    ) {
       try {
         await createUserWithEmailAndPassword(auth, userId, pw)
         const uid = auth.currentUser.uid
+        commit("SET_UID", uid)
 
         const computedTheather = theather.split(" ")[0]
 
@@ -68,7 +85,15 @@ export default {
           department,
           theather: computedTheather,
           vacation: 10,
+          vacationList: [],
         })
+
+        await updateDoc(doc(db, "theater", computedTheather), {
+          employees: arrayUnion(uid),
+        })
+
+        await dispatch("getUser")
+        router.push("/")
       } catch (error) {
         console.log(error)
       }
