@@ -75,7 +75,7 @@ export default {
     },
 
     async getUser({ state, commit }) {
-      console.log("object")
+      console.log("getUser")
       const uid = state.uid
 
       const docRef = doc(db, "employee", uid)
