@@ -12,12 +12,12 @@
     <!--  -->
     <div class="container">
       <div class="header">
-        <VueTimepicker format="hh:mm" v-model="timeData" />
+        <VueTimepicker v-model="timeData" :minute-interval="30" />
 
         <v-btn @click="commuteStart('출근')">출근</v-btn>
         <v-btn @click="commuteStart('퇴근')">퇴근</v-btn>
 
-        선택한 시간: {{ today }}
+        선택한 날짜: {{ today }}
       </div>
 
       <v-calendar
@@ -49,16 +49,19 @@
       userInfo(newVal) {
         this.events = newVal.commutes
       },
+      timeData(newVal) {
+        console.log(newVal)
+      },
     },
     computed: {
       ...mapState("authStore", ["userInfo", "uid"]),
     },
     data: () => ({
       timeData: {
-        hh: moment().format("hh"),
-        mm: moment().format("mm"),
+        HH: "",
+        mm: "",
       },
-      today: moment().format("YYYY-MM-DD hh:mm"),
+      today: moment().format("YYYY-MM-DD"),
       events: [],
       colors: [
         "blue",
@@ -74,7 +77,7 @@
       async commuteStart(label) {
         this.events.push({
           name: label,
-          start: this.today,
+          start: this.today + " " + this.timeData.HH + ":" + this.timeData.mm,
           color: label === "출근" ? "orange" : "deep-purple",
         })
 
@@ -83,7 +86,7 @@
         })
       },
       onClickDate(data) {
-        this.today = data.date + " " + moment().format("hh:mm")
+        this.today = data.date
       },
     },
     mounted() {

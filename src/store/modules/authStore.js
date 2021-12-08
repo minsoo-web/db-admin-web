@@ -86,6 +86,7 @@ export default {
           theather: computedTheather,
           vacation: 10,
           vacationList: [],
+          commutes: [],
         })
 
         await updateDoc(doc(db, "theater", computedTheather), {
