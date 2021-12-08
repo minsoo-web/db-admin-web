@@ -8,6 +8,8 @@
   import { onAuthStateChanged } from "firebase/auth"
   import { auth } from "./firebase"
   import { mapMutations } from "vuex"
+  import moment from "moment"
+  import "moment/locale/ko" // without this line it didn't work
 
   export default {
     name: "App",
@@ -19,6 +21,7 @@
       ...mapMutations("authStore", ["SET_UID"]),
     },
     mounted() {
+      moment.locale("ko")
       onAuthStateChanged(auth, user => {
         if (user) {
           //
@@ -34,4 +37,8 @@
   }
 </script>
 
-scss
+<style lang="scss">
+  p {
+    margin: 0 !important;
+  }
+</style>
