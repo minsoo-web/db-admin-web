@@ -19,10 +19,11 @@
         if (user) {
           //
 
-          this.$router.push("/")
+          if (this.$route.path !== "/") this.$router.push("/")
         } else {
           //
-          this.$router.push("/auth/sign-in")
+          if (this.$route.path !== "/auth/sign-in")
+            this.$router.push("/auth/sign-in")
         }
       })
     },

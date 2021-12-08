@@ -29,22 +29,24 @@
         :rules="[rules.require]"
         hide-details="auto"
       ></v-text-field>
-      <v-text-field
+      <v-select
         v-model="department"
+        :items="departmentList"
         label="부서명"
-        :rules="[rules.require]"
         hide-details="auto"
-      ></v-text-field>
+      ></v-select>
       <v-select
         v-model="theather"
         :items="computedTheaterLabel"
         label="근무 영화관 (코드)"
+        hide-details="auto"
       ></v-select>
       <!--  -->
       <div class="button-wrapper">
         <v-btn
           class="login-btn"
           :loading="loading"
+          :disabled="!isAllPass"
           color="secondary"
           @click="
             postSignUp({
@@ -81,6 +83,7 @@
       },
     },
     data: () => ({
+      departmentList: ["영업팀", "경영지원팀", "시설관리팀"],
       rules: {
         require: value => !!value || "필수입력 사항입니다.",
         min: v => v.length >= 8 || "비밀번호는 최소 8글자 이상입니다.",

@@ -1,6 +1,9 @@
-import { signInWithEmailAndPassword } from "firebase/auth"
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth"
 import { auth, db } from "../../firebase"
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs, setDoc, doc } from "firebase/firestore"
 
 export default {
   namespaced: true,
@@ -44,12 +47,21 @@ export default {
       }
     },
 
-    async postSignUp({ dispatch }, payload) {
-      await dispatch("getTheaterList")
+    async postSignUp(constext, { userId, pw, userName, department, theather }) {
+      try {
+        await createUserWithEmailAndPassword(auth, userId, pw)
+        const uid = auth.currentUser.uid
 
-      console.log(payload)
-      // Todo: 이메일 회원가입
-      // store 에 저장
+        await setDoc(doc(db, "employee", uid), {
+          id: uid,
+          name: userName,
+          department,
+          theather,
+          vacation: 10,
+        })
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
 }
