@@ -1,16 +1,25 @@
 <template>
   <div>
-    <v-sheet tile height="56" class="d-flex">
-      <VueTimepicker format="hh:mm" v-model="timeData" />
-
-      <v-btn @click="commuteStart('출근')">출근</v-btn>
-      <v-btn @click="commuteStart('퇴근')">퇴근</v-btn>
-
-      선택한 시간: {{ today }}
+    <v-sheet
+      tile
+      height="56"
+      class="d-flex"
+      style="align-items: center; padding: 20px; font-size: 20px"
+    >
+      출퇴근 관리
     </v-sheet>
 
     <!--  -->
-    <div>
+    <div class="container">
+      <div class="header">
+        <VueTimepicker format="hh:mm" v-model="timeData" />
+
+        <v-btn @click="commuteStart('출근')">출근</v-btn>
+        <v-btn @click="commuteStart('퇴근')">퇴근</v-btn>
+
+        선택한 시간: {{ today }}
+      </div>
+
       <v-calendar
         ref="calendar"
         locale="kr"
@@ -82,3 +91,14 @@
     },
   }
 </script>
+
+<style lang="scss" scoped>
+  .container {
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+
+    .header {
+      margin-bottom: 20px;
+    }
+  }
+</style>

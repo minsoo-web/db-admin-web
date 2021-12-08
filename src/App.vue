@@ -41,6 +41,11 @@
   p {
     margin: 0 !important;
   }
+  ul {
+    list-style: none;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
   * {
     box-sizing: border-box !important;
   }
