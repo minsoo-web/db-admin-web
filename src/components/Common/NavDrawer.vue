@@ -95,8 +95,8 @@
           },
           {
             title: "고충신고",
-            icon: "mdi-account-circle-outline",
-            activeIcon: "mdi-account-circle",
+            icon: "mdi-comment-account-outline",
+            activeIcon: "mdi-comment-account",
             path: "/voice-of-customer",
           },
           {
@@ -108,22 +108,22 @@
 
           {
             title: "비품 관리",
-            icon: "mdi-checkbox-multiple-marked-circle-outline",
-            activeIcon: "mdi-checkbox-multiple-marked-circle",
+            icon: "mdi-gift-outline",
+            activeIcon: "mdi-gift",
             path: "/manage-product",
           },
         ],
         movieItems: [
           {
             title: "배급 영화 관리",
-            icon: "mdi-checkbox-multiple-marked-circle-outline",
-            activeIcon: "mdi-checkbox-multiple-marked-circle",
+            icon: "mdi-movie-cog-outline",
+            activeIcon: "mdi-movie-cog",
             path: "/manage-movie",
           },
           {
             title: "상영 일정 관리",
-            icon: "mdi-checkbox-multiple-marked-circle-outline",
-            activeIcon: "mdi-checkbox-multiple-marked-circle",
+            icon: "mdi-movie-plus-outline",
+            activeIcon: "mdi-movie-plus",
             path: "/manage-movie-date",
           },
         ],
