@@ -1,7 +1,7 @@
 <template>
   <section class="sign-in-form">
     <div class="container">
-      <div class="logo-container"><span>DB코딩보험</span></div>
+      <div class="logo-container"><span>DB 코딩보험</span></div>
       <v-form v-model="emailPass">
         <v-text-field
           label="이메일"

@@ -38,7 +38,7 @@
   import "vue2-timepicker/dist/VueTimepicker.css"
   import moment from "moment"
 
-  import { mapState } from "vuex"
+  import { mapActions, mapState } from "vuex"
   import { doc, updateDoc } from "@firebase/firestore"
   import { db } from "../firebase"
 
@@ -46,6 +46,9 @@
     name: "ManageCommuting",
     components: { VueTimepicker },
     watch: {
+      async uid() {
+        await this.getUser()
+      },
       userInfo(newVal) {
         this.events = newVal.commutes
       },
@@ -74,6 +77,7 @@
       ],
     }),
     methods: {
+      ...mapActions("authStore", ["getUser"]),
       async commuteStart(label) {
         this.events.push({
           name: label,
@@ -90,6 +94,7 @@
       },
     },
     mounted() {
+      this.events = this.userInfo.commutes
       console.log(this.userInfo)
     },
   }
